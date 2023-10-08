@@ -1,22 +1,18 @@
 import { TaskCard } from "./TaskCard";
-import PropTypes from "prop-types";
+import { useContext } from "react";
+import { TaskContext } from "../context/TaskContext";
 
-function TaskList({ tasks, deleteTask }) {
+function TaskList() {
+  const { tasks } = useContext(TaskContext);
   if (tasks.length === 0) {
     return <div>no hay tareas</div>;
   }
   return (
     <>
-      <div>
-        {tasks.map((task) => (
-          <TaskCard task={task} key={task.id} deleteTask={deleteTask} />
-        ))}
-      </div>
+      {tasks.map((task) => (
+        <TaskCard task={task} key={task.id} />
+      ))}
     </>
   );
 }
-TaskList.propTypes = {
-  tasks: PropTypes.array.isRequired,
-  deleteTask: PropTypes.func.isRequired,
-};
 export default TaskList;
