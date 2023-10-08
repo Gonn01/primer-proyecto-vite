@@ -2,17 +2,22 @@ import PropTypes from "prop-types";
 import { useState, useEffect, createContext } from "react";
 export const UserContext = createContext();
 export function UserContextProvider(props) {
-  const [usersList, setUsers] = useState([]);
-  // cuando TaskContextProvider es creado se activa y a tasks le da el
+  // variable userList y funcion para cambiar esa variable
+  // inicializada en []
+  const [userList, setUsers] = useState([]);
+
+  // cuando UserContextProvider es creado se activa y a userList le da el
   // valor de data que esta importado arriba
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((data) => {
+        // a cada user le meto una propiedad img con la url de la imagen
         let x = data.map((item, index) => ({
           ...item,
-          img: `https://robohash.org/${index + 1}.png`, // You can replace this with the actual image URL or logic to generate it
+          img: `https://robohash.org/${index + 1}.png`,
         }));
+        // seteo la variable userList con el valor de x
         setUsers(x);
       })
       .catch((err) => {
@@ -21,10 +26,10 @@ export function UserContextProvider(props) {
   }, []);
 
   function CreateUser(userName, desc) {
-    //creo un nuevo array y le agrega la task
-    let i = usersList.length + 1;
+    //creo un nuevo array y le agrega el user
+    let i = userList.length + 1;
     setUsers([
-      ...usersList,
+      ...userList,
       {
         name: userName,
         id: i,
@@ -41,13 +46,15 @@ export function UserContextProvider(props) {
       },
     ]);
   }
+  // funcion para borrar un usuario
   function DeleteUser(id) {
-    setUsers(usersList.filter((t) => t.id !== id));
+    setUsers(userList.filter((t) => t.id !== id));
   }
   return (
     <UserContext.Provider
+      // proveo a UserContext el valor de userList, CreateUser y DeleteUser
       value={{
-        tasks: usersList,
+        userList: userList,
         createUser: CreateUser,
         deleteUser: DeleteUser,
       }}
