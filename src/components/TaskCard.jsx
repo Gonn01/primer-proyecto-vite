@@ -7,10 +7,15 @@ export function TaskCard({ task }) {
   return (
     <TaskContext.Consumer>
       {() => (
-        <div>
-          <h1>{task.title}</h1>
-          <h2>{task.descripcion}</h2>
-          <button onClick={() => deleteTask(task.id)}>Delete</button>
+        <div className="bg-gray-800 text-white p-3 rounded-md">
+          <h1 className="font-bold text-xl capitalize">{task.title}</h1>
+          <h2 className="text-gray-400 text-sm">{task.descripcion}</h2>
+          <button
+            className="bg-red-500 px-2 py-1 rounded mt-4 hover:bg-red-200 "
+            onClick={() => deleteTask(task.id)}
+          >
+            Delete
+          </button>
         </div>
       )}
     </TaskContext.Consumer>

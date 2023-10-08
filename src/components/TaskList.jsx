@@ -8,11 +8,11 @@ function TaskList() {
     return <div>no hay tareas</div>;
   }
   return (
-    <>
+    <div className="grid grid-cols-4 gap-2">
       {tasks.map((task) => (
         <TaskCard task={task} key={task.id} />
       ))}
-    </>
+    </div>
   );
 }
 export default TaskList;
