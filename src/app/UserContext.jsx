@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect, createContext } from "react";
 export const UserContext = createContext();
 export function UserContextProvider(props) {
@@ -6,35 +7,20 @@ export function UserContextProvider(props) {
   // inicializada en []
   const [userList, setUsers] = useState([]);
 
-  // cuando UserContextProvider es creado se activa y a userList le da el
-  // valor de data que esta importado arriba
-  // useEffect(() => {
-  //   fetch("https://jsonplaceholder.typicode.com/users")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       // a cada user le meto una propiedad img con la url de la imagen
-  //       let x = data.map((item, index) => ({
-  //         ...item,
-  //         img: `https://robohash.org/${index + 1}.png`,
-  //       }));
-  //       // seteo la variable userList con el valor de x
-  //       setUsers(x);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // }, []);
-  useEffect(() => {
+  function fetchData() {
     fetch("/api/tasks")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setUsers(data);
       })
       .catch((err) => {
         console.log(err.message);
       });
+  }
+  useEffect(() => {
+    fetchData();
   }, []);
+
   function CreateUser(userName, desc) {
     fetch("/api/tasks", {
       method: "POST",
@@ -56,35 +42,55 @@ export function UserContextProvider(props) {
         "Content-type": "application/json; charset=UTF-8",
       },
     })
-      .then((response) => console.log(response))
+      .then(() => fetchData())
       .catch((err) => {
         console.log(err.message);
       });
-
-    //creo un nuevo array y le agrega el user
-    let i = userList.length + 1;
-    setUsers([
-      ...userList,
-      {
-        name: userName,
-        id: i,
-        body: desc,
-        img: `https://robohash.org/${i}.png`,
-        email: `${userName}@gmail.com`,
-        address: {
-          city: "Buenos Aires",
-          country: "Argentina",
-        },
-        company: {
-          name: "RTC",
-        },
-      },
-    ]);
   }
   // funcion para borrar un usuario
-  function DeleteUser(id) {
-    setUsers(userList.filter((t) => t.id !== id));
+  function DeleteUser(user) {
+    console.log("Deleting Task with ID:", user._id);
+    fetch(`/api/tasks/${user._id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log("Response Status:", response.status);
+        if (response.status === 204) {
+          // HTTP 204 No Content means success
+          console.log("Task deleted successfully.");
+          fetchData(); // Reload the data
+        } else {
+          console.log("Task deletion failed.");
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }
+  function UpdateUser(user, name) {
+    console.log("Updating Task with ID:", user._id);
+    fetch(`/api/tasks/${user._id}`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ name: name }),
+    })
+      .then((response) => {
+        console.log("Response Status:", response.status);
+        console.log("Task updated successfully.");
+        fetchData();
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
   return (
     <UserContext.Provider
       // proveo a UserContext el valor de userList, CreateUser y DeleteUser
@@ -92,6 +98,7 @@ export function UserContextProvider(props) {
         userList: userList,
         createUser: CreateUser,
         deleteUser: DeleteUser,
+        updateUser: UpdateUser,
       }}
     >
       {props.children}

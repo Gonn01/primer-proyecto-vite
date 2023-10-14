@@ -20,13 +20,18 @@ router.post("/", async (req, res) => {
 });
 //si vas a http://localhost:3000/api/tasks/id actualiza una tarea y te devuelve "tarea actualizada"
 router.put("/:id", async (req, res) => {
-  const { title, description } = req.body;
-  const newTask = { title, description };
+  const { name } = req.body;
+  const newTask = { name };
   await Task.findByIdAndUpdate(req.params.id, newTask);
   res.json({ status: "tarea actualizada" });
 });
 //si vas a http://localhost:3000/api/tasks/id elimina una tarea y te devuelve "tarea eliminada"
 router.delete("/:id", async (req, res) => {
-  await Task.findByIdAndRemove(req.params.id);
-  res.json({ status: "tarea eliminada" });
+  try {
+    const deletedTask = await Task.findByIdAndRemove(req.params.id);
+    console.log("Deleted Task:", deletedTask._id);
+    res.status(204).json({ status: "tarea eliminada" });
+  } catch (error) {
+    res.status(500).json({ status: "ERRORR" });
+  }
 });
