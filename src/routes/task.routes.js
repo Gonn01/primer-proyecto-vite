@@ -4,7 +4,7 @@ import { Task } from "../models/task.js";
 //si vas a http://localhost:3000/api/tasks obtiene todas las tareas y te devuelve las tareas
 router.get("/", async (req, res) => {
   const tasks = await Task.find();
-  res.json("tareas obtenidas: " + tasks);
+  res.json(tasks);
 });
 //si vas a http://localhost:3000/api/tasks/id obtiene una tarea y te devuelve la tarea
 router.get("/:id", async (req, res) => {
@@ -13,8 +13,8 @@ router.get("/:id", async (req, res) => {
 });
 //si vas a http://localhost:3000/api/tasks crea una tarea y te devuelve "tarea creada
 router.post("/", async (req, res) => {
-  const { title, description } = req.body;
-  const task = new Task({ title, description });
+  const { name, username, email, address, company, img } = req.body;
+  const task = new Task({ name, username, email, address, company, img });
   await task.save();
   res.json({ status: "tarea creada" });
 });

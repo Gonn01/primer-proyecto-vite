@@ -10,6 +10,16 @@ export default {
     path: path.resolve(__dirname, "src/public"), // Updated path resolution
     filename: "bundle.js",
   },
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, "dist"),
+    },
+    port: 3000,
+    open: true,
+    hot: true,
+    compress: true,
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
@@ -18,8 +28,8 @@ export default {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        test: /\.(css|scss|sass)/,
+        use: ["css-loader", "postcss-loader", "sass-loader"],
       },
     ],
   },

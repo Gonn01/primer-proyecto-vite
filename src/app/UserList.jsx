@@ -1,6 +1,7 @@
 // import { UserCard } from "./UserCard.jsx";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { UserContext as UserContext } from "./UserContext.jsx";
+import { UserCard } from "./UserCard.jsx";
 
 function UserList() {
   // tomo de UserContext la lista de usuarios
@@ -13,8 +14,7 @@ function UserList() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2 w-4/5 mx-auto ">
       {userList.map((user) => (
-        // <UserCard user={user} key={user.id} />
-        <div key={user.id}></div>
+        <UserCard user={user} key={user.id} />
       ))}
     </div>
   );

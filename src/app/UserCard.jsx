@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { UserContext as UserContext } from "./UserContext.jsx";
-import "./index.css";
 export function UserCard({ user: user }) {
   // agarro la funcion deleteUser de UserContext
   const { deleteUser } = useContext(UserContext);

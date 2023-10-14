@@ -3,7 +3,6 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import { router } from "./routes/task.routes.js";
-// eslint-disable-next-line no-unused-vars
 import mongoose from "./database.js";
 
 const __filename = fileURLToPath(import.meta.url);

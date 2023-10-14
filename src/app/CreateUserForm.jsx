@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./UserContext.jsx";
-import "./index.css";
 function CreateUserForm() {
   // variable name y funcion para cambiar esa variable
   // inicializada en ''
