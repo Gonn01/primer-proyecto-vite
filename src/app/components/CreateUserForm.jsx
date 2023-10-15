@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useContext } from "react";
-import { UserContext } from "./UserContext.jsx";
+import { UserContext } from "../context/UserContext.jsx";
 function CreateUserForm() {
   // variable name y funcion para cambiar esa variable
   // inicializada en ''
@@ -17,41 +17,32 @@ function CreateUserForm() {
   const { createUser } = useContext(UserContext);
 
   return (
-    <div className="fixed right-0 bottom-0 bg-gray-300 p-5 w-60">
-      {/* Input para ingresar el nombre de usuario */}
-      <input
-        className="mx-auto w-52 focus:outline-none"
+    <div className=" bg-gray-300 p-5 w-60">
+      <InputCustom
         placeholder="Username"
-        // en el onchange cambio la variable name al value del input
-        onChange={(e) => setName(e.target.value)}
-        // el valor inicial del input es el valor de name
+        onChange={setName(e.target.value)}
         value={name}
-      ></input>
-
-      <input
-        className="mx-auto w-52 focus:outline-none mt-1"
+      />
+      <InputCustom
         placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={setEmail(e.target.value)}
         value={email}
-      ></input>
-      <input
-        className="mx-auto w-52 focus:outline-none mt-1"
+      />
+      <InputCustom
         placeholder="City"
-        onChange={(e) => setCity(e.target.value)}
+        onChange={setCity(e.target.value)}
         value={city}
-      ></input>
-      <input
-        className="mx-auto w-52 focus:outline-none mt-1"
+      />
+      <InputCustom
         placeholder="Country"
-        onChange={(e) => setCountry(e.target.value)}
+        onChange={setCountry(e.target.value)}
         value={country}
-      ></input>
-      <input
-        className="mx-auto w-52 focus:outline-none mt-1"
+      />
+      <InputCustom
         placeholder="Company"
-        onChange={(e) => setCompany(e.target.value)}
+        onChange={setCompany(e.target.value)}
         value={company}
-      ></input>
+      />
 
       {/* Boton para crear el usuario */}
       <div className="text-center mt-3">
@@ -73,3 +64,13 @@ function CreateUserForm() {
 }
 
 export default CreateUserForm;
+function InputCustom({ placeholder, onChange, value }) {
+  return (
+    <input
+      className="mx-auto w-52 focus:outline-none"
+      placeholder={placeholder}
+      onChange={onChange}
+      value={value}
+    ></input>
+  );
+}

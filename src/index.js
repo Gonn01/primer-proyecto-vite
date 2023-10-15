@@ -2,7 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
-import { router } from "./routes/task.routes.js";
+import { router } from "./routes/users.routes.js";
 import mongoose from "./database.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -17,7 +17,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 //Routes
-app.use("/api/tasks", router);
+app.use("/api/users", router);
 
 // Static files
 app.use(express.static(path.join(__dirname, "public")));

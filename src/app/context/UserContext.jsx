@@ -8,7 +8,7 @@ export function UserContextProvider(props) {
   const [userList, setUsers] = useState([]);
 
   function fetchData() {
-    fetch("/api/tasks")
+    fetch("/api/users/getUsers")
       .then((response) => response.json())
       .then((data) => {
         setUsers(data);
@@ -22,7 +22,7 @@ export function UserContextProvider(props) {
   }, []);
 
   function CreateUser(name, gmail, city, country, company) {
-    fetch("/api/tasks", {
+    fetch("/api/users/createUser", {
       method: "POST",
       body: JSON.stringify({
         name: name,
@@ -48,8 +48,7 @@ export function UserContextProvider(props) {
   }
   // funcion para borrar un usuario
   function DeleteUser(user) {
-    console.log("Deleting Task with ID:", user._id);
-    fetch(`/api/tasks/${user._id}`, {
+    fetch(`/api/users/deleteUser/${user._id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -70,19 +69,23 @@ export function UserContextProvider(props) {
         console.log(err.message);
       });
   }
-  function UpdateUser(user, name) {
-    console.log("Updating Task with ID:", user._id);
-    fetch(`/api/tasks/${user._id}`, {
+  function UpdateUser(id, name, email, city, country, company) {
+    const addres = { city: city, country: country };
+    const companys = { name: company };
+    fetch(`/api/users/updateUser/${id}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
         "Content-type": "application/json",
       },
-      body: JSON.stringify({ name: name }),
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        address: addres,
+        company: companys,
+      }),
     })
-      .then((response) => {
-        console.log("Response Status:", response.status);
-        console.log("Task updated successfully.");
+      .then(() => {
         fetchData();
       })
       .catch((err) => {

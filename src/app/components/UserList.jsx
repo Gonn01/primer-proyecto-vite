@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useContext } from "react";
-import { UserContext as UserContext } from "./UserContext.jsx";
+import { UserContext as UserContext } from "../context/UserContext.jsx";
 import { UserCard } from "./UserCard.jsx";
 
 function UserList() {

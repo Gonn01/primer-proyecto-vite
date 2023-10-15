@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-
-const URI = "mongodb://localhost/tasks";
+// nombre de la db a la que me voy a conectar
+const URI = "mongodb://localhost/users";
 
 mongoose
   .connect(URI)
