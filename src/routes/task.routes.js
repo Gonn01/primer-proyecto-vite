@@ -13,8 +13,8 @@ router.get("/:id", async (req, res) => {
 });
 //si vas a http://localhost:3000/api/tasks crea una tarea y te devuelve "tarea creada
 router.post("/", async (req, res) => {
-  const { name, username, email, address, company, img } = req.body;
-  const task = new Task({ name, username, email, address, company, img });
+  const { name, email, address, company, img } = req.body;
+  const task = new Task({ name, email, address, company, img });
   await task.save();
   res.json({ status: "tarea creada" });
 });

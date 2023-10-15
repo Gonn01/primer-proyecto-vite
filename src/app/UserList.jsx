@@ -1,4 +1,4 @@
-// import { UserCard } from "./UserCard.jsx";
+// eslint-disable-next-line no-unused-vars
 import React, { useContext } from "react";
 import { UserContext as UserContext } from "./UserContext.jsx";
 import { UserCard } from "./UserCard.jsx";

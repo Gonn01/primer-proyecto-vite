@@ -21,19 +21,18 @@ export function UserContextProvider(props) {
     fetchData();
   }, []);
 
-  function CreateUser(userName, desc) {
+  function CreateUser(name, gmail, city, country, company) {
     fetch("/api/tasks", {
       method: "POST",
       body: JSON.stringify({
-        name: userName,
-        username: desc,
-        email: `${userName}@gmail.com`,
+        name: name,
+        email: gmail,
         address: {
-          city: "Buenos Aires",
-          country: "Argentina",
+          city: city,
+          country: country,
         },
         company: {
-          name: "RTC",
+          name: company,
         },
         img: `https://robohash.org/${userList.length + 1}.png`,
       }),

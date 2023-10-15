@@ -8,7 +8,10 @@ function CreateUserForm() {
 
   // variable desc y funcion para cambiar esa variable
   // inicializada en ''
-  const [desc, setDescription] = useState("");
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [company, setCompany] = useState("");
 
   // agarro la funcion createUser de UserContext
   const { createUser } = useContext(UserContext);
@@ -18,22 +21,37 @@ function CreateUserForm() {
       {/* Input para ingresar el nombre de usuario */}
       <input
         className="mx-auto w-52 focus:outline-none"
-        placeholder="Nombre de usuario"
+        placeholder="Username"
         // en el onchange cambio la variable name al value del input
         onChange={(e) => setName(e.target.value)}
         // el valor inicial del input es el valor de name
         value={name}
       ></input>
 
-      {/* textarea para ingresar la descripcion del usuario */}
-      <textarea
-        className="mx-auto mt-3 w-52 focus:outline-none min-h-20 max-h-20 resize-none"
-        placeholder="Escribe la descripcion del usuario"
-        // en el onchange cambio la variable desc al value del textarea
-        onChange={(e) => setDescription(e.target.value)}
-        // el valor inicial del textarea es el valor de desc
-        value={desc}
-      ></textarea>
+      <input
+        className="mx-auto w-52 focus:outline-none mt-1"
+        placeholder="Email"
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+      ></input>
+      <input
+        className="mx-auto w-52 focus:outline-none mt-1"
+        placeholder="City"
+        onChange={(e) => setCity(e.target.value)}
+        value={city}
+      ></input>
+      <input
+        className="mx-auto w-52 focus:outline-none mt-1"
+        placeholder="Country"
+        onChange={(e) => setCountry(e.target.value)}
+        value={country}
+      ></input>
+      <input
+        className="mx-auto w-52 focus:outline-none mt-1"
+        placeholder="Company"
+        onChange={(e) => setCompany(e.target.value)}
+        value={company}
+      ></input>
 
       {/* Boton para crear el usuario */}
       <div className="text-center mt-3">
@@ -42,9 +60,9 @@ function CreateUserForm() {
           // en el onclick hago un prevent para que haga reload de la paigna y creo el usuario, tambien seteo las variables en '' para que los campos se vacien
           onClick={function (e) {
             e.preventDefault();
-            createUser(name, desc);
+            createUser(name, email, city, country, company);
             setName("");
-            setDescription("");
+            setEmail("");
           }}
         >
           Añadir
