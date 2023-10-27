@@ -10,6 +10,7 @@ export function UserCard({ user }) {
   const { deleteUser, updateUser } = useContext(UserContext);
   const [isEditing, setEditing] = useState(false);
   const [name, setName] = useState(user.name);
+  const [borrar, setBorrar] = useState(false);
   const [email, setEmail] = useState(user.email);
   const [city, setCity] = useState(user.address.city);
   const [country, setCountry] = useState(user.address.country);
@@ -19,14 +20,41 @@ export function UserCard({ user }) {
   // estilo del texto de la informacion del usuario
   let styleInfo = "text-white";
   // estilo de las etiquetas
-  let styleEtiquetas =
-    "inline-block bg-sky-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2";
   function chango() {
     updateUser(user._id, name, email, city, country, company);
     setEditing(!isEditing);
   }
+  function toggleBorrar() {
+    setBorrar(!borrar);
+  }
+  function Etiqueta({ etiquetas }) {
+    let styleEtiquetas = `flex bg-sky-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 w-min-full`;
+    const handleMouseEnter = () => {
+      setBorrar(true);
+    };
+
+    const handleMouseLeave = () => {
+      setBorrar(false);
+    };
+    return etiquetas.map((etiqueta) => (
+      <>
+        <span
+          className={styleEtiquetas}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {etiqueta}
+          {borrar ? (
+            <span className="flex align-middle">
+              <FaTimes />
+            </span>
+          ) : null}
+        </span>
+      </>
+    ));
+  }
   return (
-    <div className="bg-gray-700 rounded overflow-hidden shadow-lg flex flex-col w-64 min-w-full">
+    <div className="bg-gray-700 rounded overflow-hidden shadow-lg flex flex-col w-64 min-w-full overflow-y-scroll scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
       <div className="w-full text-end">
         <button
           className={styleDeleteButton}
@@ -135,9 +163,7 @@ export function UserCard({ user }) {
 
         <div className="mt-3 h-24">
           <p className="mb-2 font-bold text-white">Etiquetas:</p>
-          <span className={styleEtiquetas}>#photography</span>
-          <span className={styleEtiquetas}>#travel</span>
-          <span className={styleEtiquetas}>#winter</span>
+          <Etiqueta etiquetas={["Frontend", "Backend", "Fullstack"]} />
         </div>
       </div>
     </div>

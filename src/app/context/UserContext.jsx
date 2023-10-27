@@ -34,7 +34,7 @@ export function UserContextProvider(props) {
         company: {
           name: company,
         },
-        img: `https://robohash.org/${userList.length + 1}.png`,
+        img: `https://robohash.org/${name}.png`,
       }),
       headers: {
         Accept: "application/json",
@@ -58,11 +58,10 @@ export function UserContextProvider(props) {
       .then((response) => {
         console.log("Response Status:", response.status);
         if (response.status === 204) {
-          // HTTP 204 No Content means success
-          console.log("Task deleted successfully.");
-          fetchData(); // Reload the data
+          console.log("User deleted successfully.");
+          fetchData();
         } else {
-          console.log("Task deletion failed.");
+          console.log("User deletion failed.");
         }
       })
       .catch((err) => {

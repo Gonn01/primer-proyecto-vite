@@ -11,6 +11,7 @@ function App() {
         <Route path="/" element={<UserList />}></Route>
         <Route path="/1" element={<CreateUserForm />}></Route>
       </Routes>
+      <CreateUserForm />
     </>
   );
 }

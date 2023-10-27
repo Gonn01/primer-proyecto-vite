@@ -18,31 +18,49 @@ function CreateUserForm() {
 
   return (
     <div className=" bg-gray-300 p-5 w-60">
-      <InputCustom
+      {/* <InputCustom
         placeholder="Username"
-        onChange={setName(e.target.value)}
+        // onChange={setName(e.target.value)}
         value={name}
-      />
-      <InputCustom
+      /> */}
+      <input
+        className="mx-auto w-52 focus:outline-none"
+        placeholder={"placeholder"}
+        onChange={(e) => setName(e.target.value)}
+        value={name}
+      ></input>
+      <input
+        className="mx-auto w-52 focus:outline-none"
+        placeholder={"placeholder"}
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+      ></input>
+      <input
+        className="mx-auto w-52 focus:outline-none"
+        placeholder={"placeholder"}
+        onChange={(e) => setCity(e.target.value)}
+        value={city}
+      ></input>
+      {/* <InputCustom
         placeholder="Email"
-        onChange={setEmail(e.target.value)}
+        // onChange={setEmail(e.target.value)}
         value={email}
       />
       <InputCustom
         placeholder="City"
-        onChange={setCity(e.target.value)}
+        // onChange={setCity(e.target.value)}
         value={city}
       />
       <InputCustom
         placeholder="Country"
-        onChange={setCountry(e.target.value)}
+        // onChange={setCountry(e.target.value)}
         value={country}
       />
       <InputCustom
         placeholder="Company"
-        onChange={setCompany(e.target.value)}
+        // onChange={(e) => setCompany(e.target.value)}
         value={company}
-      />
+      /> */}
 
       {/* Boton para crear el usuario */}
       <div className="text-center mt-3">
