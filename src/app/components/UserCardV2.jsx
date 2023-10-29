@@ -9,7 +9,7 @@ export function UserCardV2({ user }) {
         <div className="bg-[#175264] h-40 py-3.5 rounded-t-xl">
           <div className="flex justify-center">
             <img
-              className="border-solid border-2 rounded-full border-[#FFEFEB] w-44 mt-10"
+              className="border-solid border-2 rounded-full border-[#FFEFEB] w-44 mt-10 hover:scale-105 transition-all duration-75"
               src={user.img}
               alt={`${user.name}`}
             />
