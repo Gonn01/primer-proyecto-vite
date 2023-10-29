@@ -1,9 +1,19 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useContext } from "react";
-import { UserContext as UserContext } from "../context/UserContext.jsx";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../context/UserContext.jsx";
 import { UserCardV2 } from "./UserCardV2.jsx";
+import { Popup } from "../Portal.jsx";
 
 function UserList() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
+
   // tomo de UserContext la lista de usuarios
   const { userList } = useContext(UserContext);
   // si la lista esta vacia muestro un texto
@@ -16,6 +26,12 @@ function UserList() {
       {userList.map((user) => (
         <UserCardV2 user={user} key={user._id} />
       ))}
+      <div>
+        <button onClick={openPopup}>Abrir Popup</button>
+        <Popup isOpen={isPopupOpen} onClose={closePopup}>
+          <div>sadas</div>
+        </Popup>
+      </div>
     </div>
   );
 }

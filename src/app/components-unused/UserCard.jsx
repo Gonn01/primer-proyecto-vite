@@ -145,7 +145,6 @@ export function UserCard({ user }) {
           </>
         ) : (
           <>
-            {" "}
             {user.email != "" ? (
               <p className={styleInfo}>Email: {user.email}</p>
             ) : null}
