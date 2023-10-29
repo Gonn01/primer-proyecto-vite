@@ -12,7 +12,7 @@ function UserList() {
   }
   // si no esta vacia hago un map y por cada item muestro un componente UserCard y le asigno una id
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap bg-gradient-to-b from-[#175264] to bg-orange-200 h-screen pt-20 overflow-y-auto justify-center xl:justify-normal">
       {userList.map((user) => (
         <UserCardV2 user={user} key={user._id} />
       ))}

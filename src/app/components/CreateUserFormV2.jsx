@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext.jsx";
 function CreateUserFormV2() {
   const [name, setName] = useState("");
-
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
@@ -26,7 +25,7 @@ function CreateUserFormV2() {
       </div>
 
       <div className="h-screen bg-[#175264] w-full">
-        <form className="flex flex-col w-full justify-center h-full" action="">
+        <form className="flex flex-col w-full justify-center h-full">
           <div className="mx-auto w-80">
             <h2 className="text-center text-lg text-white font-bold">
               Create your robot!
@@ -49,9 +48,23 @@ function CreateUserFormV2() {
             <input
               type="text"
               className="mt-3 w-80 px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-[#ea5a0c]"
-              placeholder="Model"
+              placeholder="City"
               onChange={(e) => setCity(e.target.value)}
               value={city}
+            />
+            <input
+              type="text"
+              className="mt-3 w-80 px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-[#ea5a0c]"
+              placeholder="Country"
+              onChange={(e) => setCountry(e.target.value)}
+              value={country}
+            />
+            <input
+              type="text"
+              className="mt-3 w-80 px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-[#ea5a0c]"
+              placeholder="Company"
+              onChange={(e) => setCompany(e.target.value)}
+              value={company}
             />
             <div className="w-80 flex justify-end">
               <a
@@ -60,11 +73,14 @@ function CreateUserFormV2() {
                   createUser(name, email, city, country, company);
                   setName("");
                   setEmail("");
+                  setCity("");
+                  setCountry("");
+                  setCompany("");
                 }}
                 className="mt-12 mx-auto bg-gradient-to-l from-[#FACC15aa] to bg-[#ea5a0c] text-white font-bold block w-max py-4 px-6 rounded-xl shadow-xl shadow-bright-red/30 md:mx-0"
                 href="#"
               >
-                Get Started
+                Create
               </a>
             </div>
           </div>
