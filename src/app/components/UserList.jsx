@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useContext } from "react";
 import { UserContext as UserContext } from "../context/UserContext.jsx";
-import { UserCard } from "./UserCard.jsx";
+import { UserCardV2 } from "./UserCardV2.jsx";
 
 function UserList() {
   // tomo de UserContext la lista de usuarios
@@ -12,9 +12,9 @@ function UserList() {
   }
   // si no esta vacia hago un map y por cada item muestro un componente UserCard y le asigno una id
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2 w-4/5 mx-auto ">
+    <div className="flex flex-wrap">
       {userList.map((user) => (
-        <UserCard user={user} key={user._id} />
+        <UserCardV2 user={user} key={user._id} />
       ))}
     </div>
   );

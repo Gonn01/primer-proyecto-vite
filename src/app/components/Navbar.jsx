@@ -3,14 +3,10 @@ import React from "react";
 export function Navbar() {
   return (
     <nav className="flex justify-between">
-      <CustomLink to="/" text="Home"></CustomLink>
+      <p>Robots!</p>
       <ul className="list-none flex">
-        <li>
-          <CustomLink to="/1" text="Section Nro1" />
-        </li>
-        <li>
-          <CustomLink to="/2" text="Section Nro2" />
-        </li>
+        <CustomLink to="/" text="Home"></CustomLink>
+        <CustomLink to="/create-user" text="Section Nro1" />
       </ul>
     </nav>
   );

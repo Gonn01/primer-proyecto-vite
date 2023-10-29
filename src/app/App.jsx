@@ -1,5 +1,5 @@
 import UserList from "./components/UserList.jsx";
-import CreateUserForm from "./components/CreateUserForm.jsx";
+import CreateUserFormV2 from "./components/CreateUserFormV2.jsx";
 import React from "react";
 import { Navbar } from "./components/Navbar.jsx";
 import { Routes, Route } from "react-router-dom";
@@ -9,9 +9,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<UserList />}></Route>
-        <Route path="/1" element={<CreateUserForm />}></Route>
+        <Route path="/create-user" element={<CreateUserFormV2 />}></Route>
       </Routes>
-      <CreateUserForm />
     </>
   );
 }
