@@ -1,8 +1,19 @@
 import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext.jsx";
-export function UserCardV2({ user }) {
+import { Popup } from "../Portal.jsx";
+import { EditRobotForm } from "./EditRobotForm.jsx";
+export function UserCardV2({ user, isEditing }) {
   const { deleteUser } = useContext(UserContext);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
+  console.log(user);
   return (
     <div className="shadow-sm shadow-gray-800 w-96 h-[34rem] rounded-t-xl rounded-b-xl m-11">
       <div className="shadow-sm shadow-gray-800 rounded-t-xl rounded-b-xl">
@@ -14,16 +25,26 @@ export function UserCardV2({ user }) {
               alt={`${user.name}`}
             />
           </div>
-          <div className="flex justify-end -mt-[15.5rem] -mr-4">
-            <img
-              onClick={() => deleteUser(user)}
-              className="mt-2 mr-2 rounded-full bg-orange-200 w-6 p-1 shadow-xs shadow-white cursor-pointer"
-              src="https://flaticons.net/icon.php?slug_category=mobile-application&slug_icon=close"
-              alt="Delete"
-            />
-          </div>
+          {!isEditing ? (
+            <div className="flex justify-end -mt-[15.5rem] -mr-4">
+              <img
+                onClick={() => deleteUser(user)}
+                className="mt-2 mr-2 rounded-full bg-orange-200 w-6 p-1 shadow-xs shadow-white cursor-pointer"
+                src="https://flaticons.net/icon.php?slug_category=mobile-application&slug_icon=close"
+                alt="Delete"
+              />
+            </div>
+          ) : null}
         </div>
       </div>
+      {!isEditing ? (
+        <div>
+          <button onClick={openPopup}>Abrir Popup</button>
+          <Popup isOpen={isPopupOpen} onClose={closePopup}>
+            <EditRobotForm user={user} />
+          </Popup>
+        </div>
+      ) : null}
 
       <div className="bg-orange-200 h-96 w-96 py-3.5 rounded-b-xl flex items-start flex-col justify-evenly pt-8">
         <UserData campo="Name" informacion={user.name} />
@@ -55,6 +76,6 @@ UserCardV2.propTypes = {
   user: PropTypes.object.isRequired,
 };
 UserData.propTypes = {
-  campo: PropTypes.string.isRequired,
-  informacion: PropTypes.string.isRequired,
+  campo: PropTypes.string,
+  informacion: PropTypes.string,
 };

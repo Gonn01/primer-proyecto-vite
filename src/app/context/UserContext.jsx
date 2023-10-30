@@ -68,20 +68,18 @@ export function UserContextProvider(props) {
         console.log(err.message);
       });
   }
-  function UpdateUser(id, name, email, city, country, company) {
-    const addres = { city: city, country: country };
-    const companys = { name: company };
-    fetch(`/api/users/updateUser/${id}`, {
+  function UpdateUser(user) {
+    fetch(`/api/users/updateUser/${user._id}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
-        email: email,
-        address: addres,
-        company: companys,
+        name: user.name,
+        email: user.email,
+        address: user.address,
+        company: user.company,
       }),
     })
       .then(() => {
