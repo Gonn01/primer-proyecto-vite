@@ -80,6 +80,7 @@ export function UserContextProvider(props) {
         email: user.email,
         address: user.address,
         company: user.company,
+        img: user.img,
       }),
     })
       .then(() => {

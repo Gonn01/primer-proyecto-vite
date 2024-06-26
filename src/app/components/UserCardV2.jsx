@@ -26,20 +26,29 @@ export function UserCardV2({ user, isEditing }) {
             />
           </div>
           {!isEditing ? (
-            <div className="flex justify-end -mt-[15.5rem] -mr-4">
-              <img
-                onClick={() => deleteUser(user)}
-                className="mt-2 mr-2 rounded-full bg-orange-200 w-6 p-1 shadow-xs shadow-white cursor-pointer"
-                src="https://flaticons.net/icon.php?slug_category=mobile-application&slug_icon=close"
-                alt="Delete"
-              />
-            </div>
+            <>
+              <div className="flex justify-end -mt-[15.5rem] -mr-4">
+                <img
+                  onClick={() => deleteUser(user)}
+                  className="mt-2 mr-2 rounded-full bg-orange-200 w-6 p-1 shadow-xs shadow-white cursor-pointer"
+                  src="https://flaticons.net/icon.php?slug_category=mobile-application&slug_icon=close"
+                  alt="Delete"
+                />
+              </div>
+              <div className="flex justify-end -mr-4">
+                <img
+                  onClick={openPopup}
+                  className="mt-2 mr-2 rounded-full bg-orange-200 w-6 p-1 shadow-xs shadow-white cursor-pointer"
+                  src="	https://icons.veryicon.com/png/o/miscellaneous/linear-small-icon/edit-246.png"
+                  alt="Update"
+                />
+              </div>
+            </>
           ) : null}
         </div>
       </div>
       {!isEditing ? (
         <div>
-          <button onClick={openPopup}>Abrir Popup</button>
           <Popup isOpen={isPopupOpen} onClose={closePopup}>
             <EditRobotForm user={user} />
           </Popup>

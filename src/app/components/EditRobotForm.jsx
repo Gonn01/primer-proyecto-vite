@@ -21,7 +21,11 @@ export function EditRobotForm({ user }) {
               placeholder="Name"
               onChange={(e) => {
                 setUserState(function () {
-                  const newUser = { ...userState, name: e.target.value };
+                  const newUser = {
+                    ...userState,
+                    name: e.target.value,
+                    img: `https://robohash.org/${e.target.value}`,
+                  };
                   return newUser;
                 });
               }}
@@ -96,7 +100,7 @@ export function EditRobotForm({ user }) {
                   e.preventDefault();
                   updateUser(userState);
                 }}
-                className="mt-12 mx-auto bg-gradient-to-l from-[#FACC15aa] to bg-[#ea5a0c] text-white font-bold block w-max py-4 px-6 rounded-xl shadow-xl shadow-bright-red/30 md:mx-0"
+                className="mt-12 mx-auto bg-gradient-to-l from-[#FACC15aa] to bg-[#ea5a0c] text-white font-bold block w-max py-2 px-4 rounded-xl shadow-xl shadow-bright-red/30 md:mx-0"
                 href="#"
               >
                 Edit
